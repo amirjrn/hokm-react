@@ -2,19 +2,29 @@ import React, { useState, useEffect } from 'react';
 import Player from "./players";
 import Socket from "../../socket/index";
 import Card from "../cards/card";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Suit from './suit';
 import Hokms from './hokms';
+import addTeams from './../../store/actions/teams'
 import setAndRemoveState from '../../logic/setAndRemoveState';
+import { v4 as uuidv4 } from 'uuid';
+import playerPos from '../../logic/playerPos';
 const Deck = () => {
+    const dispatch = useDispatch();
     const [events, setEvents] = useState([]);
     const [players, setPlayers] = useState([]);
     const [cardPlayed, setCardPlayed] = useState([]);
     const [hokm, setHokm] = useState();
     const [hakem, setHakem] = useState();
+    const [playerIndex, setPlayerIndex] = useState(0);
     const name = useSelector(state => state.name);
+    const teams = useSelector(state => state.teams)
     useEffect(() => {
+        Socket.on("teams", function (teams) {
+            dispatch(addTeams(teams));
+        })
         Socket.on("prev-players", function (name) {
+            setPlayerIndex(playerIndex + 1);
             setPlayers(prevPlayers => [...prevPlayers, name]);
         });
         Socket.on("new-user", function (name) {
@@ -46,13 +56,14 @@ const Deck = () => {
             <div>{`حاکم بازی : ${hakem ? hakem : "تعیین نشده"}`}</div>
             <div>{hokm ? <Suit suit={hokm} /> : "حکم تعیین نشده"}</div>
             <ul className="suits">
-                {(hakem === name) ? <Hokms suits={["del", "khaj", "khesht", "pik"]} /> : "منتظر حکم بمانید"}
+                {(hakem === name && !hokm) ? <Hokms suits={["del", "khaj", "khesht", "pik"]} /> : "منتظر حکم بمانید"}
             </ul>
             <ul className="events">
                 {events.map(event => <li className="event">{event[1] + event[0]}</li>)}
             </ul>
             <ul className="players">
-                {players.map(player => <Player name={player} />)}
+                {/* {teams.map(team => team.players.map(player => player !== name ? <Player name={player} key={uuidv4()} /> : null))} */}
+                {players.map(player => <Player name={player} key={uuidv4()} />)}
             </ul>
             <ul className="deck">
                 {cardPlayed.map((card, i) => <Card card={card} key={i} />)}

@@ -72,6 +72,9 @@ ul.playercards.firstopponent{
 ul.playercards.secondopponent{
   
 }
+ul.cards.notmyturn{
+  display: none;
+}
 ul.playercards li{
   list-style: none;
   display: none;

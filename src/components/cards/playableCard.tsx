@@ -10,7 +10,7 @@ const PlayableCard = ({ card }) => {
       position={{ x: 0, y: pos }}
       onStop={handleDrag}
     >
-      <li className="card" data-card={card[0] + card[1]} >
+      <li className="card" >
         <Card card={card}></Card>
       </li>
     </Draggable >

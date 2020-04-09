@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Playable from './playableCard';
 import sortCards from '../../logic/sortCards'
 import Socket from '../../socket/index';
-
+import { v4 as uuidv4 } from 'uuid';
 
 const Cards = () => {
   const [cards, setCards] = useState([]);
@@ -19,6 +19,10 @@ const Cards = () => {
       setCards(prevstate => [...sortCards(prevstate, true)])
       setShowall(!showall);
     });
+    Socket.on("remove-card", function (card) {
+      console.log(card);
+      setCards(prevCards => prevCards.filter(prevcard => prevcard[0] !== card[0] || prevcard[1] !== card[1]))
+    })
   }, []);
   return cards.length ? (
     <div>
@@ -28,8 +32,8 @@ const Cards = () => {
       ${turn ? 'myturn' : 'notmyturn'}
       `
       }>
-        {cards.map((card, i) => {
-          return (<Playable card={card} key={i} />);
+        {cards.map(card => {
+          return (<Playable card={card} key={uuidv4()} />);
         })}
       </ul>
     </div>
