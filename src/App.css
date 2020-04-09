@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+   /* background-image: url(https://i.pinimg.com/originals/a9/b7/ca/a9b7ca93ff8f6b648201973fd54fe006.jpg);
+  background-image: url(https://i.pinimg.com/originals/56/91/63/5691638d9fe48c7566d68ab34208aca4.jpg);  */
+  background-size: cover;
+  background-position: center;
 }
 
 .App-logo {
@@ -35,4 +39,53 @@
   to {
     transform: rotate(360deg);
   }
+}
+ul{
+  padding:0;
+  margin:0;
+}
+ul.cards{
+
+}
+ul.cards li{
+
+list-style: none;
+display: none;
+margin-left: -40px;
+}
+ul.cards li img{
+height: 100px;
+
+}
+ul.cards li:nth-child(-n+5){
+  display: inline-block;
+}
+ul.cards.showall li {
+display: inline-block;
+}
+ul.playercards.teamate{
+  
+}
+ul.playercards.firstopponent{
+  
+}
+ul.playercards.secondopponent{
+  
+}
+ul.playercards li{
+  list-style: none;
+  display: none;
+  margin-left: -40px;
+  }
+  ul.playercards li img{
+  height: 100px;
+  }
+  ul.playercards li:nth-child(-n+5){
+    display: inline-block;
+  }
+  ul.playercards.showall li {
+  display: inline-block;
+  }
+.card{
+  display: inline-block;
 }
