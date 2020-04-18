@@ -1,32 +1,16 @@
-import React, { useEffect, useState, memo } from 'react';
-import PlayerCard from "./playercards";
-import Socket from "../../socket/index";
-import playerPos from './../../logic/playerPos'
-const Player = ({ name, myName, teams }) => {
-    const pos = playerPos(name, myName, teams);
-    const [playercard, setPlayercard] = useState(false);
-    const [showall, setShowall] = useState(false);
-    useEffect(() => {
-        Socket.on("cards", function () {
-            setPlayercard(!playercard);
-            console.log("here");
-            console.log(playercard);
-        });
-        Socket.on("hokm", function () {
-            setShowall(!showall);
-        });
-    }, []);
+import React from 'react';
+import Player from "./player";
+import { useSelector } from 'react-redux';
+const Players = () => {
+    const teams = useSelector(state => state.teams);
+    const name = useSelector(state => state.name)
     return (
-
-        < div className={pos} >
-            <div className="playername" >{name}</div>
-            <ul className={showall ? 'playercards showall' : 'playercards'}>
-                {playercard ? [...Array(13)].map((e, i) => <PlayerCard key={i} />) : ""}
+        <div>
+            <ul className="players">
+                {teams.map(team => team.players.map(player => player !== name ? <Player name={player} /> : null))}
             </ul>
-        </div >
-
+        </div>
     );
-
 }
 
-export default memo(Player);
+export default Players;

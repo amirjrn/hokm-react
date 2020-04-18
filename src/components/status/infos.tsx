@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Socket from "../../socket/index";
 import Suit from '../../components/deck/suit';
 import { useSelector } from 'react-redux';
-import { setWinner } from './../../store/actions/teams';
 const Infos = () => {
     const [hokm, setHokm] = useState();
     const [hakem, setHakem] = useState();
-    const teams = useSelector(state => state.team);
+    const teams = useSelector(state => state.teams);
     useEffect(() => {
         Socket.on("taeen-hakem", function (name) {
             setHakem(name);
@@ -17,11 +16,17 @@ const Infos = () => {
     }, []);
     return (
         <div>
-            <div>{`حاکم بازی : ${hakem ? hakem : "تعیین نشده"}`}</div>
             <div>{hokm ? <Suit suit={hokm} /> : "حکم تعیین نشده"}</div>
-            <div>
-                {teams.map(team => <ul><li>بازی برنده : {team.won_bazi}</li><li>دست برنده :{team.won_dast}</li></ul>)}
-            </div>
+            <ul className="winnings">
+                {teams.map((team, i) =>
+                    <li>
+                        <ul>
+                            <li>{team.won_bazi}{i === 0 ? ":" : null}</li>
+                            <li>{team.won_dast}{i === 0 ? ":" : null}</li>
+                        </ul>
+                    </li>
+                )}
+            </ul>
         </div>
     );
 }

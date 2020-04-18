@@ -7,9 +7,10 @@ function usePlayable(event, data): [number, (e: any, ui: any) => void] {
     const name = useSelector((state: AppState) => state.name);
     const [pos, setPos] = useState(0);
     const handleDrag = (e, ui) => {
-        if (ui.lastY < -40) {
+        if (ui.lastY < -110) {
             Socket.emit(event, ...data, name, game);
             setPos(ui.lastY)
+
         }
     };
     return [pos, handleDrag]

@@ -1,9 +1,29 @@
-.App {
+#root {
+  overflow: hidden;
   text-align: center;
-   /* background-image: url(https://i.pinimg.com/originals/a9/b7/ca/a9b7ca93ff8f6b648201973fd54fe006.jpg);
-  background-image: url(https://i.pinimg.com/originals/56/91/63/5691638d9fe48c7566d68ab34208aca4.jpg);  */
-  background-size: cover;
-  background-position: center;
+  height: 100vh;
+  width: 100%;
+  background-image: url(https://www.parsifarsh.com/upload/product/WAJlrf5tvA.jpg);
+ background-size: repeat;
+ background-position: center;
+}
+#root:before{
+  content:"";
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  opacity: .3;
+  background-color: black;
+  z-index: 1;
+}
+.App {
+  position: absolute;
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+  z-index: 2;
 }
 
 .App-logo {
@@ -40,32 +60,128 @@
     transform: rotate(360deg);
   }
 }
+.App .rooms ul{
+  width: 60%;
+  margin-left: 20%;
+ 
+}
+.App .rooms ul li{
+ padding:7px 0;
+ margin:3px 0;
+ background-color:#1f213a;
+ list-style: none;
+ color: white;
+ font-weight: bold;
+ font-family: unset;
+}
 ul{
   padding:0;
   margin:0;
 }
+.gameInfo{
+  position: absolute;
+  background:#337d7a;
+  color : white;
+  font-weight: bold;
+  font-family: unset;
+}
+.gameInfo ul li{
+  list-style: none;
+  display: inline-block;
+}
+.gameInfo ul li ul li{
+  display: list-item;
+}
+.events{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  background-color: darkslategrey;
+  color: white;
+  z-index: 1000;
+}
+.errors{
+  position: absolute;
+  width: 100%;
+  top: 0;
+      background-color: firebrick;
+      color :white;
+      z-index: 1000;
+}
 .players{
-  position: relative;
- 
-  height:100vh;
+  position: absolute;
+  height: 100vh;
+  width: 100%;
 }
 .players .first{
   position: absolute;
   right :0;
-  transform: rotate(270deg);
+  top:50%;
+  margin-top: 52px;
+  transform: translateY(-50%);
 }
 .players .second{
   position: absolute;
   left : 0;
-  transform: rotate(90deg);
+  margin-top: 52px;
+  top:50%;
+  transform: translateY(-50%);
 }
 .players .teamate{
   position: absolute;
   top: 0;
-  transform: rotate(180deg);
+  width: 100%;
+}
+.players .teamate ul{
+  margin-left: 71px;
+}
+.players .teamate ul li{
+  margin-left: -80px;
+}
+ul.suits {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 9999;
+}
+ul.suits li {
+  display: inline-block;
+  margin: 0 10px;
+}
+ul.deck{
+  position: relative;
+  height: 80vh;
+  margin-top: 10vh;
+  width: 80%;
+  margin-left: 10%;
+}
+ul.deck li{
+  position: absolute;
+  list-style: none;
+}
+ul.deck li.me{
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+ul.deck li.teamate{
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+ul.deck li.first{
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+ul.deck li.second{
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 ul.cards{
-
+  margin-left:40px;
 }
 ul.cards li{
 
@@ -83,32 +199,47 @@ ul.cards li:nth-child(-n+5){
 ul.cards.showall li {
 display: inline-block;
 }
-ul.playercards.teamate{
-  
-}
-ul.playercards.firstopponent{
-  
-}
-ul.playercards.secondopponent{
-  
-}
 ul.cards.notmyturn{
   display: none;
 }
 ul.playercards li{
   list-style: none;
   display: none;
-  margin-left: -40px;
   }
+  
   ul.playercards li img{
   height: 100px;
   }
   ul.playercards li:nth-child(-n+5){
-    display: inline-block;
+    display: list-item;
   }
   ul.playercards.showall li {
-  display: inline-block;
+  display: list-item;
   }
+  .teamate ul.playercards li:nth-child(-n+5){
+    display: inline-block;
+  }
+  .teamate ul.playercards.showall li{
+    list-style: none;
+    display: inline-block;
+    }
+    .second ul.playercards li{
+      transform: rotate(90deg);
+      margin-top: -95px;
+    }
+    .second ul.playercards.showall li{
+      list-style: none;
+      display: list-item;
+      }
+      .first ul.playercards li{
+        transform: rotate(270deg);
+        transform: rotate(90deg);
+        margin-top: -95px;
+      }
+      .first ul.playercards.showall li{
+        list-style: none;
+        display: list-item;
+        }
 .card{
   display: inline-block;
 }

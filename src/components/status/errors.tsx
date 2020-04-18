@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import setAndRemoveState from '../../logic/setAndRemoveState'
 import Socket from "../../socket/index";
+import useTempState from './../../custom-hooks/useTempState'
 const Errors = () => {
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useTempState([], 5000);
 
     useEffect(() => {
         Socket.on("err", function (err) {
-            setAndRemoveState(setErrors, ["خطا", err], 10000)
+            setErrors(["خطا", err]);
         });
     }, []);
     return (

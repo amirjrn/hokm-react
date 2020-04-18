@@ -21,7 +21,7 @@ const RoomsList = () => {
         <div className="rooms">
             <ul>
                 {rooms.map((roomName, i) => {
-                    return (<Room room={roomName} key={uuidv4()} />);
+                    return (<Room room={roomName} key={i} />);
                 })}
             </ul>
         </div >

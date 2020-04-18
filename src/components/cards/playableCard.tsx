@@ -1,13 +1,14 @@
-import React from "react";
+import React, { memo } from "react";
 import Card from './card';
 import usePlayable from '../../custom-hooks/usePlayable'
 import Draggable from 'react-draggable';
 const PlayableCard = ({ card }) => {
   const [pos, handleDrag] = usePlayable("sendcard", card);
+  console.log("render playable")
   return (
     <Draggable
       axis="y"
-      position={{ x: 0, y: pos }}
+      position={{ x: 0, y: 0 }}
       onStop={handleDrag}
     >
       <li className="card" >
@@ -17,4 +18,4 @@ const PlayableCard = ({ card }) => {
   );
 }
 // controlled component , composable component , socket.emit callbackfunction
-export default PlayableCard;
+export default memo(PlayableCard);

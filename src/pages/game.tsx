@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Cards from '../components/cards/cards';
 import Socket from "../socket/index";
 import Infos from './../components/status/infos';
+import Players from "./../components/deck/players"
+import Hokm from "./../components/deck/hokm"
 import { removeGame } from '../store/actions/game';
 const Game = ({ gameName, name }) => {
     const dispatch = useDispatch();
@@ -17,8 +19,12 @@ const Game = ({ gameName, name }) => {
     });
     return (
         <React.Fragment>
-            <div>{gameName}: نام اتاق </div>
-            <Infos />
+            <div className="gameInfo">
+                <div>{gameName}: نام اتاق </div>
+                <Infos />
+            </div>
+            <Hokm />
+            <Players />
             <Deck />
             <Cards />
         </React.Fragment>

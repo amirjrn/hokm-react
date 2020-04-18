@@ -1,34 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import setAndRemoveState from '../../logic/setAndRemoveState'
 import Socket from "../../socket/index";
+import useTempState from './../../custom-hooks/useTempState'
 const Events = () => {
-    const [event, setEvents] = useState([]);
+    const [events, setEvents] = useTempState([], 5000);
     useEffect(() => {
-
         Socket.on("new-user", function (name) {
-            setAndRemoveState(setEvents, ["وارد بازی شد", name], 4000);
+            setEvents(["وارد بازی شد", name]);
         });
         Socket.on("taeen-hakem", function (name) {
-            setAndRemoveState(setEvents, ["حاکم شد", name], 4000);
+            setEvents(["حاکم شد", name]);
         });
         Socket.on("hokm", function (hokm) {
-            setAndRemoveState(setEvents, ["حکمه", hokm], 4000);
+            setEvents(["حکمه", hokm]);
         });
         Socket.on("winner-bazi", function (winner) {
-            setAndRemoveState(setEvents, ["برنده شد", winner], 4000);
+            setEvents(["برنده شد", winner]);
         })
         Socket.on("prev-players", function (name) {
-            setAndRemoveState(setEvents, ["در بازی حضور دارد", name], 10000);
-        });
-        Socket.on("new-user", function (name) {
-            setAndRemoveState(setEvents, ["وارد بازی شد", name], 10000);
+            setEvents(["در بازی حضور دارد", name], 10000);
         });
     }, []);
     return (
         <div>
 
-            <ul className="errors">
-                {event.map(err => <li className="event">{err[1] + err[0]}</li>)}
+            <ul className="events">
+                {events.map(event => <li className="event">{event[1] + event[0]}</li>)}
             </ul>
         </div>
     );

@@ -1,7 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import gameReducer from './reducers/gameReducers'
+import gameReducer from './reducers/gameReducers';
 import nameReducer from './reducers/nameReducers';
-import teamsReducer from './reducers/teamsReducers'
+import teamsReducer from './reducers/teamsReducers';
+import hokmReducer from './reducers/hokmReducer';
+import hakemReducer from './reducers/hakemReducer';
+import playersReducer from './reducers/playersReducer'
 const logger = store => next => action => {
     console.log('dispatching', action)
     let result = next(action)
@@ -10,7 +13,16 @@ const logger = store => next => action => {
 }
 
 
-const rootReducer = combineReducers({ game: gameReducer, name: nameReducer, teams: teamsReducer });
+const rootReducer = combineReducers(
+    {
+        game: gameReducer,
+        name: nameReducer,
+        teams: teamsReducer,
+        hokm: hokmReducer,
+        hakem: hakemReducer,
+        players: playersReducer
+    }
+);
 export type AppState = ReturnType<typeof rootReducer>;
 
 export default function configureStore() {

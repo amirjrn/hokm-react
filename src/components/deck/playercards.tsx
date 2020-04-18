@@ -1,10 +1,9 @@
 import React from 'react';
-import useImage from '../../custom-hooks/useImage';
+import backSide from './../../img/backside.png'
 const PlayerCard = ({ key }) => {
-    const image = useImage("backside", "png");
     return (
         <li key={key} className="playerCard">
-            <img className="img-palyercard" src={image} alt="playercard"></img>
+            <img className="img-palyercard" src={backSide} alt="playercard"></img>
         </li>
     );
 }

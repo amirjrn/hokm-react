@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Playable from './playableCard';
 import sortCards from '../../logic/sortCards'
 import Socket from '../../socket/index';
-import { v4 as uuidv4 } from 'uuid';
 
 const Cards = () => {
   const [cards, setCards] = useState([]);
@@ -15,9 +14,13 @@ const Cards = () => {
     Socket.on("your_turn", function (turn) {
       setTurn(turn);
     })
+    Socket.on("taeen-hakem", function (name) {
+      setShowall(false);
+      console.log("here")
+    })
     Socket.on("hokm", function () {
       setCards(prevstate => [...sortCards(prevstate, true)])
-      setShowall(!showall);
+      setShowall(true);
     });
     Socket.on("remove-card", function (card) {
       console.log(card);
@@ -28,12 +31,12 @@ const Cards = () => {
     <div>
       <ul className={`
       cards 
-      ${showall ? 'cards showall' : 'cards'}
+      ${showall ? 'showall' : ''}
       ${turn ? 'myturn' : 'notmyturn'}
       `
       }>
-        {cards.map(card => {
-          return (<Playable card={card} key={uuidv4()} />);
+        {cards.map((card, i) => {
+          return (<Playable card={card} key={JSON.stringify(card)} />);
         })}
       </ul>
     </div>
@@ -41,5 +44,4 @@ const Cards = () => {
       <div className="empty">Shuffling</div>
     );
 }
-
 export default Cards;
