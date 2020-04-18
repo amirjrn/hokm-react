@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import PlayerCard from "./playercards";
 import Socket from "../../socket/index";
-import { useSelector } from 'react-redux';
-const Player = ({ name }) => {
-    // const teams = useSelector(state => state.teams);
-    // const myName = useSelector(state => state.name);
-    // const myTeam = teams.find(team => team.players.includes(myName));
-    // const isTeamate = myTeam.players.includes(name);
-    // const pos = isTeamate ? "teamate" : "opponent";
+import playerPos from './../../logic/playerPos'
+const Player = ({ name, myName, teams }) => {
+    const pos = playerPos(name, myName, teams);
     const [playercard, setPlayercard] = useState(false);
     const [showall, setShowall] = useState(false);
     useEffect(() => {
@@ -22,10 +18,10 @@ const Player = ({ name }) => {
     }, []);
     return (
 
-        < div  >
+        < div className={pos} >
             <div className="playername" >{name}</div>
             <ul className={showall ? 'playercards showall' : 'playercards'}>
-                {playercard ? [...Array(13)].map((e, i) => <PlayerCard />) : ""}
+                {playercard ? [...Array(13)].map((e, i) => <PlayerCard key={i} />) : ""}
             </ul>
         </div >
 
@@ -33,4 +29,4 @@ const Player = ({ name }) => {
 
 }
 
-export default Player;
+export default memo(Player);

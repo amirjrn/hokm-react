@@ -3,12 +3,13 @@ import useLocalGlobalState from './custom-hooks/useLocalGlobalState';
 import addName from './store/actions/name';
 import addGame from './store/actions/game'
 import Rooms from './pages/rooms';
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux"
 import Game from './pages/game';
 import Socket from './socket/index';
 import Suit from "./components/deck/suit"
 import { AppState } from "./store/index";
 import Errors from './components/status/errors'
+import Events from './components/status/events'
 import './App.css';
 import Playablesuit from './components/deck/playableSuit';
 
@@ -35,8 +36,8 @@ function App() {
 
     <div className="App">
       <li >{name}</li>
-      <Suit suit="del" />
       <Errors />
+      <Events />
       {game ? <Game gameName={game} name={name} /> : <Rooms />}
     </div>
   )

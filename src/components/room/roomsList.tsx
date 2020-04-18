@@ -19,9 +19,6 @@ const RoomsList = () => {
 
     return rooms.length ? (
         <div className="rooms">
-            <ul className="cards showall">
-                <Playablecard card={[12, "khesht"]} key="hiva" />
-            </ul>
             <ul>
                 {rooms.map((roomName, i) => {
                     return (<Room room={roomName} key={uuidv4()} />);

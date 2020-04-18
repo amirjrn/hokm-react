@@ -4,5 +4,10 @@ function addTeams(teams) {
         teams
     }
 }
-
+export function setWinner(name) {
+    return {
+        type: 'SET_WINNER',
+        name
+    }
+}
 export default addTeams;

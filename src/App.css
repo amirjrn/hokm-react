@@ -44,6 +44,26 @@ ul{
   padding:0;
   margin:0;
 }
+.players{
+  position: relative;
+ 
+  height:100vh;
+}
+.players .first{
+  position: absolute;
+  right :0;
+  transform: rotate(270deg);
+}
+.players .second{
+  position: absolute;
+  left : 0;
+  transform: rotate(90deg);
+}
+.players .teamate{
+  position: absolute;
+  top: 0;
+  transform: rotate(180deg);
+}
 ul.cards{
 
 }
