@@ -6,14 +6,11 @@ import Socket from '../../socket/index';
 const Cards = () => {
   const [cards, setCards] = useState([]);
   const [showall, setShowall] = useState(false);
-  const [turn, setTurn] = useState(false);
+  const [turn, setTurn] = useState(true);
   useEffect(() => {
     Socket.on("cards", function (cards) {
       setCards(cards);
     });
-    Socket.on("your_turn", function (turn) {
-      setTurn(turn);
-    })
     Socket.on("taeen-hakem", function (name) {
       setShowall(false);
       console.log("here")
@@ -23,7 +20,6 @@ const Cards = () => {
       setShowall(true);
     });
     Socket.on("remove-card", function (card) {
-      console.log(card);
       setCards(prevCards => prevCards.filter(prevcard => prevcard[0] !== card[0] || prevcard[1] !== card[1]))
     })
   }, []);
@@ -32,7 +28,7 @@ const Cards = () => {
       <ul className={`
       cards 
       ${showall ? 'showall' : ''}
-      ${turn ? 'myturn' : 'notmyturn'}
+      myturn
       `
       }>
         {cards.map((card, i) => {

@@ -60,12 +60,38 @@
     transform: rotate(360deg);
   }
 }
+.input {
+  display : block;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  height: 40px;
+}
+.input.button {
+  width: 20%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin-top:20px;
+  line-height: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: bold;
+}
+.input.field {
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  box-sizing: border-box;
+}
 .App .rooms ul{
   width: 60%;
   margin-left: 20%;
  
 }
-.App .rooms ul li{
+.App .rooms ul li , .inputLabel{
  padding:7px 0;
  margin:3px 0;
  background-color:#1f213a;

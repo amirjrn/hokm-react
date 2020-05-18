@@ -1,21 +1,17 @@
-import React, { memo } from "react";
-import Card from './card';
+import React, { memo } from 'react'
+import Card from './card'
 import usePlayable from '../../custom-hooks/usePlayable'
-import Draggable from 'react-draggable';
+import Draggable from 'react-draggable'
 const PlayableCard = ({ card }) => {
-  const [pos, handleDrag] = usePlayable("sendcard", card);
-  console.log("render playable")
+  const [pos, handleDrag] = usePlayable('sendCard', card)
+  console.log('render playable')
   return (
-    <Draggable
-      axis="y"
-      position={{ x: 0, y: 0 }}
-      onStop={handleDrag}
-    >
-      <li className="card" >
+    <Draggable axis='y' position={{ x: 0, y: pos }} onStop={handleDrag}>
+      <li className='card'>
         <Card card={card}></Card>
       </li>
-    </Draggable >
-  );
+    </Draggable>
+  )
 }
 // controlled component , composable component , socket.emit callbackfunction
-export default memo(PlayableCard);
+export default memo(PlayableCard)

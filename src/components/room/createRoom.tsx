@@ -1,20 +1,18 @@
-import React, { useState, Fragment } from 'react';
-import Socket from '../../socket/index'
-import Hokms from '../deck/hokms'
+import React from 'react'
+import useInput from './../../custom-hooks/useInput'
+import Socket from './../../socket/index'
 const CreateRoom = () => {
-    const [input, setInput] = useState();
-    const handleChange = (e) => setInput(e.currentTarget.value);
-    const handleSubmit = (e) => { Socket.emit("create-room", input); e.preventDefault(); };
-
-    return (
-
-
-        <form onSubmit={handleSubmit}>
-            <input className="roomInput" name="roomInput" onChange={handleChange} />
-            <input type="submit" value="افزودن اتاق جدید" />
-        </form>
-
-    );
+  const [input, handleChange] = useInput('')
+  const handleSubmit = (e) => {
+    Socket.emit('createGame', input)
+    e.preventDefault()
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <input className='input field' name='roomInput' onChange={handleChange} />
+      <input className='input button' type='submit' value='افزودن اتاق جدید' />
+    </form>
+  )
 }
 
-export default CreateRoom;
+export default CreateRoom
